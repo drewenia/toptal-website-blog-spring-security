@@ -20,3 +20,19 @@ Projeye spring security eklendiginde diger dependency'lerden farklı olarak anı
 lerini korunaklı hale getirir. Proje ayağa kalktığında console da random bir şifre belirir. Herhangi bir endpoint'e
 gitmeye çalıştığımız da otomatik olarak login page gelir. Default username olarak "user" password olarak da console da
 bulunan generated password kullanılır
+
+Uygulamayı her yeniden çalıştırdığımızda parolanın değiştiğini lütfen unutmayın. Bu davranışı değiştirmek ve şifreyi
+statik yapmak istiyorsak application.properties dosyamıza aşağıdaki konfigürasyonu ekleyebiliriz:
+
+```
+spring.security.user.password=verysecretpass
+```
+
+Şimdi, giriş formuna kimlik bilgilerini girersek, URL'mize geri yönlendirilecek ve doğru sonucu göreceğiz. Lütfen
+kullanıma hazır authentication işleminin session based olduğunu ve oturumu kapatmak istersek aşağıdaki URL'ye
+erişebileceğimizi unutmayın: http://localhost:8080/logout
+
+Bu out-of-the-box davranış, klasik MVC web uygulamaları için kullanışlı olabilir çünkü genellikle session-based 
+authentication'a sahiptir. Ancak single-page uygulamalarda genellikle kullanışlı değildir çünkü çoğu durumda 
+client-side-rendering ve JWT based stateless authentication'a sahibizdir. Bu durumda, Spring Security framework'u 
+yoğun bir şekilde özelleştirmemiz gerekecektir.
